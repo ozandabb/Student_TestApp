@@ -32,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
         btnAddData = (Button)findViewById(R.id.add);
         btnviewAll = (Button)findViewById(R.id.button_viewAll);
         btnUpdate = (Button)findViewById(R.id.btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDelete) ;
         AddData();
         viewAll();
         UpdateData();
+        DeleteData();
     }
 
     public  void AddData() {
@@ -66,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Data Update",Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(MainActivity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
+
+    public void DeleteData() {
+        btnDelete.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer deletedRows = mydb.deleteData(editText_id.getText().toString());
+                        if(deletedRows > 0)
+                            Toast.makeText(MainActivity.this,"Data Deleted",Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(MainActivity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
                     }
                 }
         );
