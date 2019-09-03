@@ -12,9 +12,10 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper mydb;
-    EditText editName,editSurname,editMarks ,editTextId;
+    EditText editName,editSurname,editMarks ,editTextId , editText_id;
     Button btnAddData;
     Button btnviewAll;
+    Button btnUpdate;
     Button btnDelete;
 
     @Override
@@ -27,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
         editName = (EditText)findViewById(R.id.editText_name);
         editSurname = (EditText)findViewById(R.id.editText_surename);
         editMarks = (EditText)findViewById(R.id.editText_marks);
+        editText_id = (EditText)findViewById(R.id.editText_id);
         btnAddData = (Button)findViewById(R.id.add);
         btnviewAll = (Button)findViewById(R.id.button_viewAll);
+        btnUpdate = (Button)findViewById(R.id.btnUpdate);
         AddData();
         viewAll();
+        UpdateData();
     }
 
     public  void AddData() {
@@ -50,6 +54,22 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    public void UpdateData() {
+        btnUpdate.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isUpdate = mydb.updateData(editText_id.getText().toString(),
+                                editName.getText().toString(),
+                                editSurname.getText().toString(),editMarks.getText().toString());
+                        if(isUpdate == true)
+                            Toast.makeText(MainActivity.this,"Data Update",Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(MainActivity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
 
     public void viewAll() {
         btnviewAll.setOnClickListener(
